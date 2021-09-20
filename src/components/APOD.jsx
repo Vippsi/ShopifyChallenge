@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import APODCard from './APODCard';
+import ReactDatePicker from 'react-datepicker';
 
 function APOD() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [data, setData] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
   console.log(data);
 
   const getDate = () => {
@@ -18,11 +20,14 @@ function APOD() {
 
   let weekOldformatedDate = getDate();
 
+  //start_date=' +
+  //weekOldformatedDate + 
+  //
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
-        'https://api.nasa.gov/planetary/apod?start_date=' +
-          weekOldformatedDate +
+        'https://api.nasa.gov/planetary/apod?count=' + 30 +
           '&api_key=' +
           API_KEY
       );
@@ -32,18 +37,35 @@ function APOD() {
   }, []);
 
   return (
-    <div>
-      {data.map((post) => (
-        //   console.log(post.title)
-        <APODCard
-          key={post.date}
-          title={post.title}
-          hdurl={post.hdurl}
-          explanation={post.explanation}
-          copyright={post.copyright}
-          date={post.date}
-        />
-      ))}
+    <div className='apod-container'>
+      <ReactDatePicker
+        selected={startDate}
+        onChange={(date) => {
+          setStartDate(date);
+        }}
+      />
+      <div className='apod-card-container'>
+        {data.map(
+          (post) => (
+            (post.liked = false),
+            (
+              //   console.log(post.title)
+              <APODCard
+                post={post}
+                key={post.date}
+                title={post.title}
+                hdurl={post.hdurl}
+                url={post.url}
+                explanation={post.explanation}
+                copyright={post.copyright}
+                date={post.date}
+                liked={post.liked}
+                media_type={post.media_type}
+              />
+            )
+          )
+        )}
+      </div>
     </div>
   );
 }

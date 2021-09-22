@@ -54,7 +54,7 @@ function APOD() {
   }, []);
 
   /**
-   * @Description Handles liking, unliking, and adding post dates to localStorage.
+   * @Description Handles liking, un-liking, and adding post dates to localStorage.
    * @param {Object} post the current object we're working with
    * @param {Number} index the index of the current post
    */
@@ -65,19 +65,21 @@ function APOD() {
 
     setData([...data.slice(0, index), postToUpdate, ...data.slice(index + 1)]);
 
-    if (localStorage.getItem('LikedPosts') == null) {
-      localStorage.setItem('LikedPosts', '[]');
-    } else {
-      let old_data = JSON.parse(localStorage.getItem('LikedPosts'));
+    
 
-      if (post.liked === false) {
-        let newArr = old_data.filter((item) => item !== post.date);
-        localStorage.setItem('LikedPosts', JSON.stringify(newArr));
-      } else {
-        old_data.push(post.date);
-        localStorage.setItem('LikedPosts', JSON.stringify(old_data));
-      }
-    }
+    // if (localStorage.getItem('LikedPosts') == null) {
+    //   localStorage.setItem('LikedPosts', '[]');
+    // } else {
+    //   let old_data = JSON.parse(localStorage.getItem('LikedPosts'));
+
+    //   if (post.liked === false) {
+    //     let newArr = old_data.filter((item) => item !== post.date);
+    //     localStorage.setItem('LikedPosts', JSON.stringify(newArr));
+    //   } else {
+    //     old_data.push(post.date);
+    //     localStorage.setItem('LikedPosts', JSON.stringify(old_data));
+    //   }
+    // }
   };
 
   return (

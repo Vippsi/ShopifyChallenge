@@ -228,5 +228,38 @@ table {
 small {
   margin-top: 1rem;
   color: hsl(0, 0%, 96%);
+}
+
+@media screen and (max-width: 1200px) {
+  .apod-card-container {
+    grid-template-columns: repeat(2, 1fr);
+ 
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .header h1 {
+    font-size: 4rem;
+  }
+
+  .apod-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .apod-card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
 }
+/* @media screen and (max-width: 500) { 
+  .apod-card-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px 5px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+} */
+
+
+

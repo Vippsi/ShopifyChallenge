@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function APODCard({
   date,
@@ -7,26 +7,18 @@ function APODCard({
   url,
   hdurl,
   title,
-  liked,
   post,
   media_type,
+  handleLikeClick,
+  index,
 }) {
-  const [isLiked, setIsLiked] = useState(post.liked);
 
-  const handleLikeClick = (post) => {
-    setIsLiked(!isLiked);
-
-    if (post.liked) {
-      post.liked = false;
-    } else {
-      post.liked = true;
-    }
-  };
 
   return (
     <div className='apod-card'>
       <h3>
-        {title} -- <span>{date}</span>
+        {title} <br />
+        <span>{date}</span>
       </h3>
       {media_type === 'video' ? (
         <iframe
@@ -42,12 +34,11 @@ function APODCard({
       ) : (
         <img src={hdurl ? hdurl : url} alt='' />
       )}
-
       <p>{explanation}</p>
       <button
-        className={isLiked ? 'test' : null}
+        className={post.liked ? 'liked' : 'button'}
         onClick={() => {
-          handleLikeClick(post);
+          handleLikeClick(post, index);
         }}
       >
         Like
